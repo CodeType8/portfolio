@@ -1,6 +1,6 @@
 // hook: useApi
 import { useState, useCallback } from "react";
-import { apiClient } from "../components/apiClient";
+import { apiClient } from "./apiClient";
 
 export const useApi = () => {
   const [loading, setLoading] = useState(false);
