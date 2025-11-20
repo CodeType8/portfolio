@@ -11,7 +11,7 @@ function AccessInfo() {
         <Card.Body
           className="p-4 p-lg-5 text-white"
           style={{
-            backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(99, 102, 241, 0.6)), url(${sshImg})`,
+            backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(99, 102, 241, 0.6))`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

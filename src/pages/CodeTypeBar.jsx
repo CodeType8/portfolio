@@ -12,6 +12,7 @@ import {
   Modal,
 } from "react-bootstrap";
 import { useApi } from "../hooks/useApi";
+import barImg from "../assets/img/bar.jpg";
 
 // helper: getAlcoholBadgeVariant
 const getAlcoholBadgeVariant = (isAlcoholic) => {
@@ -227,8 +228,7 @@ function CodeTypeBar() {
         <Card.Body
           className="p-4 p-lg-5 text-white"
           style={{
-            backgroundImage:
-              "linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(239, 68, 68, 0.75))",
+            backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(239, 68, 68, 0.75)), url(${barImg})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

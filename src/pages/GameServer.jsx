@@ -87,7 +87,7 @@ function GameServer() {
         <Card.Body
           className="p-4 p-lg-5 text-white"
           style={{
-            backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(16, 185, 129, 0.6)), url(${palworldImg})`,
+            backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(16, 185, 129, 0.6)), url(${minecraftImg})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

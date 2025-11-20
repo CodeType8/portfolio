@@ -10,7 +10,7 @@ import {
   ListGroup,
 } from "react-bootstrap";
 import { useApi } from "../hooks/useApi";
-import portfolioImg from "../assets/img/portfolio.jpg";
+import portfolioImg from "../assets/img/bg.jpg";
 
 // function: formatDate
 const formatDate = (dateStr) => {
