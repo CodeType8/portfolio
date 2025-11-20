@@ -7,12 +7,45 @@ import ftpImg from "../assets/img/ftp.jpg";
 function AccessInfo() {
   return (
     <div className="py-4">
-      <div className="mb-4">
-        <h2 className="mb-1">Access Info</h2>
-        <p className="text-muted mb-0">
-          Centralized overview of remote access methods managed by CodeType.
-        </p>
-      </div>
+      {/* Hero header with gradient banner */}
+      <Card className="border-0 shadow-sm mb-4 rounded-4 overflow-hidden">
+        <Card.Body
+          className="p-4 p-lg-5 text-white"
+          style={{
+            backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(59, 130, 246, 0.7)), url(${sshImg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="d-flex flex-column gap-4">
+            <div className="d-flex flex-wrap align-items-center gap-2">
+              <Badge bg="primary" className="text-uppercase fw-semibold">
+                Access
+              </Badge>
+              <Badge bg="light" text="dark" className="text-uppercase fw-semibold">
+                RDP / SSH / SFTP
+              </Badge>
+              <span className="small text-light">
+                Secure entry points for CodeType-managed services.
+              </span>
+            </div>
+
+            <div className="d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-3">
+              <div className="flex-grow-1">
+                <h2 className="fw-semibold mb-2">Access Info</h2>
+                <p className="text-light mb-0">
+                  Understand which protocols are active, where to use them, and
+                  how CodeType protects every endpoint.
+                </p>
+              </div>
+              <div className="d-flex flex-wrap gap-2">
+                <Badge bg="secondary">Private distribution only</Badge>
+                <Badge bg="dark">Managed accounts</Badge>
+              </div>
+            </div>
+          </div>
+        </Card.Body>
+      </Card>
 
       <Row className="g-4">
         {/* RDP – currently not in use */}

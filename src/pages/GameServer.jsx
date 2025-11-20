@@ -82,21 +82,63 @@ function GameServer() {
 
   return (
     <div className="py-4">
-      {/* Header */}
-      <div className="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4 gap-2">
-        <div>
-          <h2 className="mb-1">Game Server</h2>
-          <p className="text-muted mb-0">
-            Overview of community game servers hosted by CodeType.
-          </p>
-        </div>
-        {pagination && (
-          <span className="small text-muted">
-            {pagination.totalItems} servers · Page {pagination.page} of{" "}
-            {pagination.totalPages}
-          </span>
-        )}
-      </div>
+      {/* Hero header with gradient banner */}
+      <Card className="border-0 shadow-sm mb-4 rounded-4 overflow-hidden">
+        <Card.Body
+          className="p-4 p-lg-5 text-white"
+          style={{
+            backgroundImage: `linear-gradient(135deg, rgba(6, 95, 70, 0.85), rgba(17, 24, 39, 0.85)), url(${palworldImg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="d-flex flex-column gap-4">
+            <div className="d-flex flex-wrap align-items-center gap-2">
+              <Badge bg="success" className="text-uppercase fw-semibold">
+                Multiplayer
+              </Badge>
+              <Badge bg="dark" className="text-uppercase fw-semibold">
+                Game Servers
+              </Badge>
+              <span className="small text-light">
+                Live status for Minecraft, Palworld, Ark, RLcraft, and more.
+              </span>
+            </div>
+
+            <div className="d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-4">
+              <div className="flex-grow-1">
+                <h2 className="fw-semibold mb-2">Game Server Hub</h2>
+                <p className="mb-3 text-light">
+                  Track which community servers are open, view quick descriptions,
+                  and grab the right ports before you jump in.
+                </p>
+                <div className="d-flex flex-wrap align-items-center gap-3">
+                  <div className="d-flex align-items-center gap-1">
+                    <Badge bg="success" pill>
+                      {openGames.length}
+                    </Badge>
+                    <span className="small text-light">Open servers</span>
+                  </div>
+                  <div className="d-flex align-items-center gap-1">
+                    <Badge bg="secondary" pill>
+                      {closedGames.length}
+                    </Badge>
+                    <span className="small text-light">Closed / maintenance</span>
+                  </div>
+                </div>
+              </div>
+              {pagination && (
+                <div className="text-light small text-lg-end">
+                  <div className="fw-semibold">{pagination.totalItems} servers</div>
+                  <div>
+                    Page {pagination.page} of {pagination.totalPages}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </Card.Body>
+      </Card>
 
       {/* Loading / Error */}
       {loading && (

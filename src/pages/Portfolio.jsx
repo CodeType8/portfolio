@@ -10,6 +10,7 @@ import {
   ListGroup,
 } from "react-bootstrap";
 import { useApi } from "../hooks/useApi";
+import portfolioImg from "../assets/img/portfolio.jpg";
 
 // function: formatDate
 const formatDate = (dateStr) => {
@@ -131,41 +132,50 @@ function Portfolio() {
           {/* ===================== */}
           {/* Header / Summary card */}
           {/* ===================== */}
-          <Card className="border-0 shadow-sm mb-4">
-            <Card.Body>
-              <Row className="g-3 align-items-center">
+          <Card className="border-0 shadow-sm mb-4 rounded-4 overflow-hidden">
+            <Card.Body
+              className="p-4 p-lg-5 text-white"
+              style={{
+                backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(79, 70, 229, 0.65)), url(${portfolioImg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            >
+              <Row className="g-4 align-items-center">
                 <Col md="auto">
                   {/* simple avatar using initials */}
                   <div
                     style={{
-                      width: 80,
-                      height: 80,
+                      width: 88,
+                      height: 88,
                       borderRadius: "50%",
-                      backgroundColor: "#212529",
+                      backgroundColor: "rgba(255, 255, 255, 0.1)",
+                      border: "1px solid rgba(255, 255, 255, 0.4)",
                       color: "#fff",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      fontSize: "1.8rem",
-                      fontWeight: 600,
+                      fontSize: "1.9rem",
+                      fontWeight: 700,
                     }}
                   >
                     {initials}
                   </div>
                 </Col>
                 <Col md>
-                  <div className="d-flex flex-wrap align-items-center gap-2 mb-1">
+                  <div className="d-flex flex-wrap align-items-center gap-2 mb-2">
                     <h2 className="mb-0">{profile.name}</h2>
                     {profile.headline && (
-                      <Badge bg="dark">{profile.headline}</Badge>
+                      <Badge bg="light" text="dark">{profile.headline}</Badge>
                     )}
+                    <Badge bg="dark">Portfolio</Badge>
                   </div>
                   {profile.nickname && (
-                    <div className="small text-muted mb-1">
+                    <div className="small text-light mb-1">
                       Also known as {profile.nickname}
                     </div>
                   )}
-                  <div className="small text-muted">
+                  <div className="small text-light">
                     {profile.location && (
                       <>
                         {profile.location}
@@ -179,7 +189,7 @@ function Portfolio() {
                   <div className="d-flex align-items-center gap-2 justify-content-md-end justify-content-start">
                     {profile.website_url && (
                       <Button
-                        variant="outline-secondary"
+                        variant="light"
                         size="sm"
                         as="a"
                         href={profile.website_url}
@@ -191,24 +201,26 @@ function Portfolio() {
                     )}
                     {profile.github_url && (
                       <Button
-                        variant="outline-secondary"
+                        variant="outline-light"
                         size="sm"
                         as="a"
                         href={profile.github_url}
                         target="_blank"
                         rel="noreferrer"
+                        className="text-white"
                       >
                         GitHub
                       </Button>
                     )}
                     {profile.linkedin_url && (
                       <Button
-                        variant="outline-secondary"
+                        variant="outline-light"
                         size="sm"
                         as="a"
                         href={profile.linkedin_url}
                         target="_blank"
                         rel="noreferrer"
+                        className="text-white"
                       >
                         LinkedIn
                       </Button>
@@ -218,11 +230,11 @@ function Portfolio() {
               </Row>
 
               {profile.summary && (
-                <Row className="mt-3">
+                <Row className="mt-4">
                   <Col md={12}>
-                    <Card className="border-0 bg-light">
+                    <Card className="border-0 bg-light bg-opacity-75">
                       <Card.Body>
-                        <Card.Title className="fs-6 mb-2">
+                        <Card.Title className="fs-6 mb-2 text-dark">
                           Professional Summary
                         </Card.Title>
                         <Card.Text className="small text-muted mb-0">
