@@ -14,36 +14,49 @@ function Streaming() {
   return (
     <div className="py-4">
       {/* Hero card with image */}
-      <Card className="border-0 shadow-sm mb-4 text-white">
-        <Card.Img src={plexImg} alt="Plex streaming" />
-        <Card.ImgOverlay className="d-flex flex-column justify-content-end">
-          <div className="bg-dark bg-opacity-50 rounded p-3 p-md-4 d-inline-block">
-            <div className="d-flex align-items-center gap-2 mb-2">
-              <Badge bg="warning" text="dark">
+      <Card className="border-0 shadow-sm mb-4 rounded-4 overflow-hidden">
+        <Card.Body
+          className="p-4 p-lg-5 text-white"
+          style={{
+            backgroundImage: `linear-gradient(135deg, rgba(23, 23, 23, 0.9), rgba(234, 179, 8, 0.55)), url(${plexImg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="d-flex flex-column gap-4">
+            <div className="d-flex flex-wrap align-items-center gap-2">
+              <Badge bg="warning" text="dark" className="text-uppercase fw-semibold">
                 Plex
+              </Badge>
+              <Badge bg="dark" className="text-uppercase fw-semibold">
+                Private Streaming
               </Badge>
               <span className="small text-light">
                 Personal media streaming by CodeType
               </span>
             </div>
-            <h2 className="mb-2">Streaming / Plex</h2>
-            <p className="mb-3 mb-md-4">
-              Access your curated library of movies, shows, and more through a
-              private Plex server, available across your devices.
-            </p>
-            <Button
-              variant="primary"
-              size="lg"
-              onClick={handleOpenPlex}
-            >
-              Go to CodeType Plex
-            </Button>
-            <div className="small text-light mt-2">
-              Opens{" "}
-              <strong>video.codetypeweb.com</strong> in a new tab.
+
+            <div className="d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-4">
+              <div className="flex-grow-1">
+                <h2 className="fw-semibold mb-3">Streaming / Plex</h2>
+                <p className="mb-4">
+                  Access your curated library of movies, shows, and more through a private Plex server.
+                  Optimized for browsers, mobile apps, smart TVs, and streaming devices without layout issues.
+                </p>
+                <div className="d-flex flex-wrap gap-2 align-items-center mb-2">
+                  <Button variant="light" size="lg" className="text-dark" onClick={handleOpenPlex}>
+                    Go to CodeType Plex
+                  </Button>
+                </div>
+                <div>
+                  <span className="small text-light">
+                    Opens <strong>video.codetypeweb.com</strong> in a new tab.
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
-        </Card.ImgOverlay>
+        </Card.Body>
       </Card>
 
       {/* Detail sections */}
@@ -109,7 +122,7 @@ function Streaming() {
 
       <div className="mt-4 small text-muted">
         All access permissions, accounts, and endpoints for the Plex server
-        are managed by <strong>CodeType</strong>.  
+        are managed by <strong>CodeType</strong>.
         Account details are shared only through secure private channels.
       </div>
     </div>
