@@ -10,7 +10,6 @@ import {
   InputGroup,
   Spinner,
   Modal,
-  ListGroup,
 } from "react-bootstrap";
 import { useApi } from "../hooks/useApi";
 
@@ -49,7 +48,6 @@ function CodeTypeBar() {
 
   // state: filters and search
   const [selectedBaseId, setSelectedBaseId] = useState("");
-  const [alcoholFilter, setAlcoholFilter] = useState("all"); // all | alcoholic | non-alcohol
   const [sort, setSort] = useState("-created_at");
   const [search, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState("");
@@ -102,12 +100,6 @@ function CodeTypeBar() {
           query.q = search;
         }
 
-        if (alcoholFilter === "alcoholic") {
-          query.is_alcoholic = true;
-        } else if (alcoholFilter === "non-alcohol") {
-          query.is_alcoholic = false;
-        }
-
         const requestKey = JSON.stringify(query);
         if (lastRecipeFetchKeyRef.current === requestKey) return;
         lastRecipeFetchKeyRef.current = requestKey;
@@ -145,17 +137,11 @@ function CodeTypeBar() {
     };
 
     fetchRecipes();
-  }, [callApi, page, pageSize, selectedBaseId, search, alcoholFilter, sort]);
+  }, [callApi, page, pageSize, selectedBaseId, search, sort]);
 
   // handler: update base spirit filter
   const handleBaseChange = (event) => {
     setSelectedBaseId(event.target.value);
-    setPage(1);
-  };
-
-  // handler: update alcohol filter
-  const handleAlcoholFilterChange = (event) => {
-    setAlcoholFilter(event.target.value);
     setPage(1);
   };
 
@@ -180,7 +166,6 @@ function CodeTypeBar() {
   // handler: reset all filters back to defaults
   const handleClearFilters = () => {
     setSelectedBaseId("");
-    setAlcoholFilter("all");
     setSort("-created_at");
     setSearch("");
     setSearchInput("");
@@ -251,7 +236,7 @@ function CodeTypeBar() {
         <Card.Body>
           <Form onSubmit={handleSearchSubmit}>
             <Row className="g-3 align-items-end">
-              <Col md={3}>
+              <Col md={4}>
                 <Form.Label>Base spirit</Form.Label>
                 <Form.Select value={selectedBaseId} onChange={handleBaseChange}>
                   <option value="">All bases</option>
@@ -263,16 +248,7 @@ function CodeTypeBar() {
                 </Form.Select>
               </Col>
 
-              <Col md={3}>
-                <Form.Label>Alcohol profile</Form.Label>
-                <Form.Select value={alcoholFilter} onChange={handleAlcoholFilterChange}>
-                  <option value="all">All drinks</option>
-                  <option value="alcoholic">Alcoholic only</option>
-                  <option value="non-alcohol">Non-alcohol only</option>
-                </Form.Select>
-              </Col>
-
-              <Col md={3}>
+              <Col md={4}>
                 <Form.Label>Sort</Form.Label>
                 <Form.Select value={sort} onChange={handleSortChange}>
                   <option value="-created_at">Newest first</option>
@@ -283,7 +259,7 @@ function CodeTypeBar() {
                 </Form.Select>
               </Col>
 
-              <Col md={3}>
+              <Col md={4}>
                 <Form.Label>Search</Form.Label>
                 <InputGroup>
                   <Form.Control
@@ -341,7 +317,11 @@ function CodeTypeBar() {
       <Row className="g-3">
         {recipes.map((recipe) => (
           <Col key={recipe.id} md={4}>
-            <Card className="h-100 border-0 shadow-sm">
+            <Card
+              className="h-100 border-0 shadow-sm"
+              role="button"
+              onClick={() => handleOpenRecipe(recipe.id)}
+            >
               <Card.Body className="d-flex flex-column">
                 <div className="d-flex justify-content-between align-items-start mb-2">
                   <div>
@@ -373,7 +353,6 @@ function CodeTypeBar() {
                       <strong>Garnish:</strong> {recipe.garnish}
                     </div>
                   )}
-                  <div>{formatPrepTime(recipe.prep_time_minutes)}</div>
                 </div>
 
                 {recipe.ingredients && (
@@ -383,25 +362,6 @@ function CodeTypeBar() {
                     <span className="text-muted">{recipe.ingredients}</span>
                   </div>
                 )}
-
-                {recipe.instructions && (
-                  <div className="small mb-3">
-                    <strong>Instructions:</strong>
-                    <br />
-                    <span className="text-muted">{recipe.instructions}</span>
-                  </div>
-                )}
-
-                <div className="d-flex align-items-center justify-content-between mt-auto">
-                  <div className="small text-muted">ID: {recipe.id}</div>
-                  <Button
-                    variant="outline-primary"
-                    size="sm"
-                    onClick={() => handleOpenRecipe(recipe.id)}
-                  >
-                    View recipe
-                  </Button>
-                </div>
               </Card.Body>
             </Card>
           </Col>
@@ -478,40 +438,44 @@ function CodeTypeBar() {
                 <Badge bg="dark">{formatAbv(selectedRecipe.abv)}</Badge>
                 <Badge bg="secondary">{formatPrepTime(selectedRecipe.prep_time_minutes)}</Badge>
                 {selectedRecipe.garnish && <Badge bg="info">Garnish: {selectedRecipe.garnish}</Badge>}
+                {selectedRecipe.glass_type && <Badge bg="light" text="dark">Glass: {selectedRecipe.glass_type}</Badge>}
+              </div>
+
+              <div className="p-3 bg-light border rounded-3">
+                <h6 className="mb-2">Profile</h6>
+                <div className="small text-muted mb-1">
+                  <strong>Base:</strong> {selectedRecipe.Base?.name || "Unknown base"}
+                </div>
+                {selectedRecipe.abv !== undefined && (
+                  <div className="small text-muted mb-1">
+                    <strong>ABV:</strong> {formatAbv(selectedRecipe.abv)}
+                  </div>
+                )}
+                {selectedRecipe.prep_time_minutes !== undefined && (
+                  <div className="small text-muted mb-1">
+                    <strong>Prep time:</strong> {formatPrepTime(selectedRecipe.prep_time_minutes)}
+                  </div>
+                )}
+                {selectedRecipe.garnish && (
+                  <div className="small text-muted mb-0">
+                    <strong>Garnish:</strong> {selectedRecipe.garnish}
+                  </div>
+                )}
               </div>
 
               {selectedRecipe.ingredients && (
-                <div>
-                  <h6 className="mb-1">Ingredients</h6>
+                <div className="p-3 bg-body-tertiary border rounded-3">
+                  <h6 className="mb-2">Ingredients</h6>
                   <p className="mb-0 text-muted">{selectedRecipe.ingredients}</p>
                 </div>
               )}
 
               {selectedRecipe.instructions && (
-                <div>
-                  <h6 className="mb-1">Directions</h6>
+                <div className="p-3 bg-body-tertiary border rounded-3">
+                  <h6 className="mb-2">Directions</h6>
                   <p className="mb-0 text-muted">{selectedRecipe.instructions}</p>
                 </div>
               )}
-
-              <ListGroup>
-                <ListGroup.Item className="d-flex justify-content-between">
-                  <span className="text-muted">Recipe ID</span>
-                  <span>{selectedRecipe.id}</span>
-                </ListGroup.Item>
-                {selectedRecipe.abv !== undefined && (
-                  <ListGroup.Item className="d-flex justify-content-between">
-                    <span className="text-muted">ABV</span>
-                    <span>{formatAbv(selectedRecipe.abv)}</span>
-                  </ListGroup.Item>
-                )}
-                {selectedRecipe.prep_time_minutes !== undefined && (
-                  <ListGroup.Item className="d-flex justify-content-between">
-                    <span className="text-muted">Prep time</span>
-                    <span>{formatPrepTime(selectedRecipe.prep_time_minutes)}</span>
-                  </ListGroup.Item>
-                )}
-              </ListGroup>
             </div>
           )}
         </Modal.Body>
