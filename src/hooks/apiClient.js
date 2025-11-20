@@ -3,8 +3,21 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
 // function: buildUrl
 const buildUrl = (path, query) => {
-  const url = `${BASE_URL}${path}`;
+  // Step 1: Resolve the base target for the API (env value or browser origin fallback)
+  const baseTarget = BASE_URL || (typeof window !== "undefined" ? window.location.origin : "http://localhost");
 
+  // Step 2: Use an absolute path as-is; otherwise, join with the base while preserving its pathname (e.g., "/api")
+  let url;
+  try {
+    url = new URL(path);
+  } catch {
+    const baseUrl = new URL(baseTarget);
+    if (!baseUrl.pathname.endsWith("/")) baseUrl.pathname = `${baseUrl.pathname}/`;
+    const trimmedPath = path.startsWith("/") ? path.slice(1) : path;
+    url = new URL(trimmedPath, baseUrl);
+  }
+
+  // Step 3: Attach any provided query parameters while ignoring empty values
   if (query && typeof query === "object") {
     Object.entries(query).forEach(([key, value]) => {
       if (value !== undefined && value !== null && value !== "") {
@@ -13,6 +26,7 @@ const buildUrl = (path, query) => {
     });
   }
 
+  // Step 4: Return the fully constructed URL string
   return url.toString();
 };
 
