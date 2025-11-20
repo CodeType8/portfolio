@@ -82,21 +82,54 @@ function GameServer() {
 
   return (
     <div className="py-4">
-      {/* Header */}
-      <div className="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4 gap-2">
-        <div>
-          <h2 className="mb-1">Game Server</h2>
-          <p className="text-muted mb-0">
-            Overview of community game servers hosted by CodeType.
-          </p>
-        </div>
-        {pagination && (
-          <span className="small text-muted">
-            {pagination.totalItems} servers · Page {pagination.page} of{" "}
-            {pagination.totalPages}
-          </span>
-        )}
-      </div>
+      {/* Header hero */}
+      <Card className="border-0 shadow-sm mb-4 rounded-4 overflow-hidden">
+        <Card.Body
+          className="p-4 p-lg-5 text-white"
+          style={{
+            backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(16, 185, 129, 0.6)), url(${palworldImg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="d-flex flex-column gap-3">
+            <div className="d-flex flex-wrap align-items-center gap-2">
+              <Badge bg="light" text="dark" className="text-uppercase fw-semibold">
+                Game Servers
+              </Badge>
+              <Badge bg="success" className="text-uppercase fw-semibold">
+                Live Status
+              </Badge>
+              <span className="small text-light">
+                Minecraft · Palworld · Ark · RLcraft
+              </span>
+            </div>
+
+            <div className="d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-4">
+              <div className="flex-grow-1">
+                <h2 className="fw-semibold mb-2">Game Server Overview</h2>
+                <p className="mb-3">
+                  Track which community servers are open, see connection details at a glance,
+                  and stay informed about availability managed by CodeType.
+                </p>
+                <div className="d-flex flex-wrap align-items-center gap-2">
+                  <Badge bg="success" pill>
+                    {openGames.length} Open
+                  </Badge>
+                  <Badge bg="secondary" pill>
+                    {closedGames.length} Closed
+                  </Badge>
+                  {pagination && (
+                    <span className="small text-light">
+                      {pagination.totalItems} total · Page {pagination.page} / {pagination.totalPages}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card.Body>
+      </Card>
 
       {/* Loading / Error */}
       {loading && (
