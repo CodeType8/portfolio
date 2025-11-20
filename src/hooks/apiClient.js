@@ -6,8 +6,16 @@ const buildUrl = (path, query) => {
   // Step 1: Resolve the base target for the API (env value or browser origin fallback)
   const baseTarget = BASE_URL || (typeof window !== "undefined" ? window.location.origin : "http://localhost");
 
-  // Step 2: Create a URL object so query parameters can be appended safely
-  const url = new URL(path, baseTarget);
+  // Step 2: Use an absolute path as-is; otherwise, join with the base while preserving its pathname (e.g., "/api")
+  let url;
+  try {
+    url = new URL(path);
+  } catch {
+    const baseUrl = new URL(baseTarget);
+    if (!baseUrl.pathname.endsWith("/")) baseUrl.pathname = `${baseUrl.pathname}/`;
+    const trimmedPath = path.startsWith("/") ? path.slice(1) : path;
+    url = new URL(trimmedPath, baseUrl);
+  }
 
   // Step 3: Attach any provided query parameters while ignoring empty values
   if (query && typeof query === "object") {
