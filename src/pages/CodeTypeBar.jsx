@@ -1,5 +1,5 @@
 // page: CodeTypeBar – cocktail recipe list
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import {
   Row,
   Col,
@@ -60,8 +60,13 @@ function CodeTypeBar() {
   const [detailError, setDetailError] = useState(null);
 
   // effect: fetch bases on mount to hydrate the filter dropdown
+  const lastBasesFetchKeyRef = useRef(null);
   useEffect(() => {
     const fetchBases = async () => {
+      const requestKey = "bases";
+      if (lastBasesFetchKeyRef.current === requestKey) return;
+      lastBasesFetchKeyRef.current = requestKey;
+
       try {
         // Step 1: call Bases API (already working) to populate filter options
         const res = await callApi("GET", "/bases");
@@ -70,6 +75,7 @@ function CodeTypeBar() {
       } catch {
         // Step 2: gracefully degrade if base list fails so recipes still render
         setBases([]);
+        lastBasesFetchKeyRef.current = null;
       }
     };
 
@@ -77,6 +83,7 @@ function CodeTypeBar() {
   }, [callApi]);
 
   // effect: fetch recipes whenever filters/page change using the recipe API contract
+  const lastRecipeFetchKeyRef = useRef(null);
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
@@ -101,12 +108,17 @@ function CodeTypeBar() {
           query.is_alcoholic = false;
         }
 
+        const requestKey = JSON.stringify(query);
+        if (lastRecipeFetchKeyRef.current === requestKey) return;
+        lastRecipeFetchKeyRef.current = requestKey;
+
         // Step 2: call the recipe list API and normalize the response shape
-        const res = await callApi("GET", "/api/bar/recipes", { query });
-        const rows = res?.data?.rows || res?.rows || [];
+        const res = await callApi("GET", "/bar/recipes", { query });
+        const payload = res?.data || res;
+        const rows = payload?.items || payload?.rows || [];
+        const paginationInfo = payload?.pagination || payload?.data?.pagination || payload?.paginationInfo;
         const totalItems =
-          res?.data?.count ?? res?.count ?? (rows ? rows.length : 0);
-        const paginationInfo = res?.data?.pagination || res?.pagination;
+          paginationInfo?.totalItems ?? payload?.count ?? (rows ? rows.length : 0);
 
         // Step 3: derive pagination metadata when the API does not return it directly
         if (paginationInfo) {
@@ -128,6 +140,7 @@ function CodeTypeBar() {
       } catch {
         setRecipes([]);
         setPagination(null);
+        lastRecipeFetchKeyRef.current = null;
       }
     };
 
@@ -181,7 +194,7 @@ function CodeTypeBar() {
 
     try {
       // Step 1: fetch the full recipe from /api/bar/recipes/:id
-      const res = await callApi("GET", `/api/bar/recipes/${recipeId}`);
+      const res = await callApi("GET", `/bar/recipes/${recipeId}`);
       const recipe = res?.data || res;
 
       // Step 2: hydrate modal state with API response
