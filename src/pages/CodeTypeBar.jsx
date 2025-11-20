@@ -208,25 +208,81 @@ function CodeTypeBar() {
     [pagination, page]
   );
 
+  // derived: stats for hero header
+  const totalRecipes = pagination?.totalItems ?? recipes.length;
+  const totalPages =
+    pagination?.totalPages ?? (totalRecipes > 0 ? Math.ceil(totalRecipes / pageSize) : 1);
+  const activeFiltersCount = useMemo(() => {
+    let count = 0;
+    if (selectedBaseId) count += 1;
+    if (search) count += 1;
+    if (sort && sort !== "-created_at") count += 1;
+    return count;
+  }, [search, selectedBaseId, sort]);
+
   return (
     <div className="py-4">
       {/* Header */}
-      <Card className="border-0 shadow-sm mb-4 bg-dark text-white">
-        <Card.Body className="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
-          <div>
-            <p className="text-uppercase text-secondary fw-semibold mb-1 small">
-              CodeType Bar
-            </p>
-            <h2 className="mb-1">Signature &amp; Zero-Proof Recipes</h2>
-            <p className="text-white-50 mb-0">
-              Discover modern cocktails powered by the official CodeType Bar API with live filters and search.
-            </p>
-          </div>
-          <div className="text-end">
-            <Badge bg="light" text="dark" pill className="mb-2">
-              Live menu
-            </Badge>
-            <div className="fw-semibold">Crafted for guests &amp; builders</div>
+      <Card className="border-0 shadow-sm mb-4 rounded-4 overflow-hidden">
+        <Card.Body
+          className="p-4 p-lg-5 text-white"
+          style={{
+            backgroundImage:
+              "linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(239, 68, 68, 0.75))",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="d-flex flex-column gap-3">
+            <div className="d-flex flex-wrap align-items-center gap-2">
+              <Badge bg="light" text="dark" className="text-uppercase fw-semibold">
+                Bar Menu
+              </Badge>
+              <Badge bg="danger" className="text-uppercase fw-semibold">
+                Modern Service
+              </Badge>
+              <span className="small text-light">
+                Signature · Zero-Proof · API Driven
+              </span>
+            </div>
+
+            <div className="d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-4">
+              <div className="flex-grow-1">
+                <h2 className="fw-semibold mb-2">Cocktail Program Overview</h2>
+                <p className="mb-3">
+                  Explore curated cocktails from the CodeType Bar with live search, base filters, and
+                  recipe detail modals designed to match the modern headers across the site.
+                </p>
+                <div className="d-flex flex-wrap align-items-center gap-2">
+                  <Badge bg="light" text="dark" pill>
+                    {totalRecipes} Recipes
+                  </Badge>
+                  <Badge bg="dark" pill>
+                    Page {page} / {totalPages}
+                  </Badge>
+                  <Badge bg={activeFiltersCount > 0 ? "danger" : "secondary"} pill>
+                    {activeFiltersCount > 0
+                      ? `${activeFiltersCount} Active Filter${activeFiltersCount > 1 ? "s" : ""}`
+                      : "No Active Filters"}
+                  </Badge>
+                </div>
+              </div>
+
+              <div className="d-flex flex-column gap-2 text-light small bg-white bg-opacity-10 border border-white border-opacity-25 rounded-3 p-3">
+                <div className="d-flex align-items-center gap-2">
+                  <span className="badge bg-success">Fresh</span>
+                  <span>Real-time menu powered by the CodeType Bar API.</span>
+                </div>
+                <div className="d-flex align-items-center gap-2">
+                  <span className="badge bg-info text-dark">Detail</span>
+                  <span>Tap any card for full recipe specs and prep notes.</span>
+                </div>
+                <div className="d-flex align-items-center gap-2">
+                  <span className="badge bg-light text-dark">Service</span>
+                  <span>Built to mirror the modern headers on home &amp; streaming.</span>
+                </div>
+              </div>
+            </div>
           </div>
         </Card.Body>
       </Card>
