@@ -11,40 +11,71 @@ function Home() {
       {/* Hero Section with bg.jpg */}
       {/* ========================= */}
       <section className="mb-5">
-        <Card className="border-0 shadow-sm text-white">
-          <Card.Img src={bgImg} alt="CodeType background" />
-          <Card.ImgOverlay className="d-flex flex-column justify-content-end">
-            {/* Semi-transparent overlay box for readability */}
-            <div className="bg-dark bg-opacity-50 rounded p-3 p-md-4 mb-2 d-inline-block">
-              <div className="d-flex align-items-center gap-2 mb-2">
-                <Badge bg="light" text="dark">CodeType</Badge>
+        <Card className="border-0 shadow-sm rounded-4 overflow-hidden">
+          <Card.Body
+            className="p-4 p-lg-5 text-white"
+            style={{
+              backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(34, 197, 94, 0.55)), url(${bgImg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              minHeight: "360px",
+            }}
+          >
+            <div className="d-flex flex-column gap-4" style={{ maxWidth: "900px" }}>
+              <div className="d-flex flex-wrap align-items-center gap-2">
+                <Badge bg="light" text="dark" className="text-uppercase fw-semibold">
+                  CodeType
+                </Badge>
+                <Badge bg="success" className="text-uppercase fw-semibold">
+                  Platform
+                </Badge>
                 <span className="small text-light">
                   Personal infrastructure · Media · Games · Tools
                 </span>
               </div>
 
-              <h1 className="mb-2">Welcome to CodeType Web</h1>
+              <div className="d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-4">
+                <div className="flex-grow-1">
+                  <h1 className="display-6 fw-semibold mb-3">Welcome to CodeType Web</h1>
+                  <p className="mb-4 text-light">
+                    A unified platform for streaming, cocktail recipes, private game servers,
+                    engineering projects, and access tools designed for quick, secure access.
+                  </p>
+                  <div className="d-flex flex-wrap gap-2">
+                    <Button as={Link} to="/streaming" variant="light" size="lg" className="text-dark">
+                      Go to Streaming
+                    </Button>
+                    <Button
+                      as={Link}
+                      to="/codetype-bar"
+                      variant="outline-light"
+                      size="lg"
+                      className="text-white"
+                    >
+                      Explore CodeType Bar
+                    </Button>
+                  </div>
+                </div>
 
-              <p className="mb-3 text-light">
-                A unified platform for streaming, cocktail recipes,
-                private game servers, engineering projects, and access tools.
-              </p>
-
-              <div className="d-flex flex-wrap gap-2">
-                <Button as={Link} to="/streaming" variant="primary" size="lg">
-                  Go to Streaming
-                </Button>
-                <Button
-                  as={Link}
-                  to="/codetype-bar"
-                  variant="outline-light"
-                  size="lg"
-                >
-                  Explore CodeType Bar
-                </Button>
+                <div className="bg-white bg-opacity-10 rounded-3 p-3 p-lg-4 w-100 w-lg-auto">
+                  <div className="d-flex flex-column gap-2 small">
+                    <div className="d-flex justify-content-between">
+                      <span className="text-light">Streaming</span>
+                      <Badge bg="primary">Live</Badge>
+                    </div>
+                    <div className="d-flex justify-content-between">
+                      <span className="text-light">Game Servers</span>
+                      <Badge bg="info" text="dark">Multiple</Badge>
+                    </div>
+                    <div className="d-flex justify-content-between">
+                      <span className="text-light">Access Tools</span>
+                      <Badge bg="secondary">Managed</Badge>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </Card.ImgOverlay>
+          </Card.Body>
         </Card>
       </section>
 
