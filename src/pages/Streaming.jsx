@@ -21,10 +21,9 @@ function Streaming() {
             backgroundImage: `linear-gradient(135deg, rgba(23, 23, 23, 0.9), rgba(234, 179, 8, 0.55)), url(${plexImg})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            minHeight: "340px",
           }}
         >
-          <div className="d-flex flex-column gap-4" style={{ maxWidth: "900px" }}>
+          <div className="d-flex flex-column gap-4">
             <div className="d-flex flex-wrap align-items-center gap-2">
               <Badge bg="warning" text="dark" className="text-uppercase fw-semibold">
                 Plex
@@ -44,28 +43,15 @@ function Streaming() {
                   Access your curated library of movies, shows, and more through a private Plex server.
                   Optimized for browsers, mobile apps, smart TVs, and streaming devices without layout issues.
                 </p>
-                <div className="d-flex flex-wrap gap-2 align-items-center">
+                <div className="d-flex flex-wrap gap-2 align-items-center mb-2">
                   <Button variant="light" size="lg" className="text-dark" onClick={handleOpenPlex}>
                     Go to CodeType Plex
                   </Button>
+                </div>
+                <div>
                   <span className="small text-light">
                     Opens <strong>video.codetypeweb.com</strong> in a new tab.
                   </span>
-                </div>
-              </div>
-
-              <div className="bg-white bg-opacity-10 rounded-3 p-3 p-lg-4 w-100 w-lg-auto small">
-                <div className="d-flex justify-content-between mb-2">
-                  <span className="text-light">Devices</span>
-                  <Badge bg="success" text="light">Multi</Badge>
-                </div>
-                <div className="d-flex justify-content-between mb-2">
-                  <span className="text-light">Security</span>
-                  <Badge bg="secondary">Managed</Badge>
-                </div>
-                <div className="d-flex justify-content-between">
-                  <span className="text-light">Availability</span>
-                  <Badge bg="primary">24/7</Badge>
                 </div>
               </div>
             </div>
@@ -136,7 +122,7 @@ function Streaming() {
 
       <div className="mt-4 small text-muted">
         All access permissions, accounts, and endpoints for the Plex server
-        are managed by <strong>CodeType</strong>.  
+        are managed by <strong>CodeType</strong>.
         Account details are shared only through secure private channels.
       </div>
     </div>

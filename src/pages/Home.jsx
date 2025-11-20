@@ -18,10 +18,9 @@ function Home() {
               backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(34, 197, 94, 0.55)), url(${bgImg})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
-              minHeight: "360px",
             }}
           >
-            <div className="d-flex flex-column gap-4" style={{ maxWidth: "900px" }}>
+            <div className="d-flex flex-column gap-4">
               <div className="d-flex flex-wrap align-items-center gap-2">
                 <Badge bg="light" text="dark" className="text-uppercase fw-semibold">
                   CodeType
@@ -54,23 +53,6 @@ function Home() {
                     >
                       Explore CodeType Bar
                     </Button>
-                  </div>
-                </div>
-
-                <div className="bg-white bg-opacity-10 rounded-3 p-3 p-lg-4 w-100 w-lg-auto">
-                  <div className="d-flex flex-column gap-2 small">
-                    <div className="d-flex justify-content-between">
-                      <span className="text-light">Streaming</span>
-                      <Badge bg="primary">Live</Badge>
-                    </div>
-                    <div className="d-flex justify-content-between">
-                      <span className="text-light">Game Servers</span>
-                      <Badge bg="info" text="dark">Multiple</Badge>
-                    </div>
-                    <div className="d-flex justify-content-between">
-                      <span className="text-light">Access Tools</span>
-                      <Badge bg="secondary">Managed</Badge>
-                    </div>
                   </div>
                 </div>
               </div>
