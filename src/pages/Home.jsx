@@ -5,7 +5,7 @@ import bgImg from "../assets/img/bg.jpg";
 
 function Home() {
   return (
-    <div>
+    <div className="py-4">
 
       {/* ========================= */}
       {/* Hero Section with bg.jpg */}
