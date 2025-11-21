@@ -1,5 +1,6 @@
 // page: AccessInfo – RDP / SSH / FTP overview with images
 import { Row, Col, Card, Badge } from "react-bootstrap";
+import PageHero from "../components/PageHero";
 import rdpImg from "../assets/img/rdp.jpg";
 import sshImg from "../assets/img/ssh.jpg";
 import ftpImg from "../assets/img/ftp.jpg";
@@ -7,40 +8,16 @@ import ftpImg from "../assets/img/ftp.jpg";
 function AccessInfo() {
   return (
     <div className="py-4">
-      <Card className="border-0 shadow-sm mb-4 rounded-4 overflow-hidden">
-        <Card.Body
-          className="p-4 p-lg-5 text-white"
-          style={{
-            backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(99, 102, 241, 0.6))`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          <div className="d-flex flex-column gap-3">
-            <div className="d-flex flex-wrap align-items-center gap-2">
-              <Badge bg="light" text="dark" className="text-uppercase fw-semibold">
-                Access
-              </Badge>
-              <Badge bg="primary" className="text-uppercase fw-semibold">
-                Secure Channels
-              </Badge>
-              <span className="small text-light">
-                RDP · SSH · FTP / SFTP managed by CodeType
-              </span>
-            </div>
-
-            <div className="d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-4">
-              <div className="flex-grow-1">
-                <h2 className="fw-semibold mb-2">Access Information</h2>
-                <p className="mb-0">
-                  Review which remote access methods are active, see usage guidance, and
-                  confirm that credentials are always distributed through secure private channels.
-                </p>
-              </div>
-            </div>
-          </div>
-        </Card.Body>
-      </Card>
+      <PageHero
+        backgroundImage={rdpImg}
+        gradient="linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(99, 102, 241, 0.6))"
+        badges={[
+          { text: "Access", variant: "light", textColor: "dark" },
+          { text: "Secure Channels", variant: "primary" },
+        ]}
+        title="Access Information"
+        description="Review which remote access methods are active, see usage guidance, and confirm that credentials are always distributed through secure private channels."
+      />
 
       <Row className="g-4">
         {/* RDP – currently not in use */}
