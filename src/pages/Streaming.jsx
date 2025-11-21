@@ -47,7 +47,7 @@ function Streaming() {
       {/* Detail sections */}
       <Row className="g-4">
         <Col md={6}>
-          <Card className="border-0 shadow-sm h-100">
+          <Card className="gradient-card bg-gradient-sky h-100">
             <Card.Body>
               <Card.Title className="mb-2">
                 How it works
@@ -76,7 +76,7 @@ function Streaming() {
         </Col>
 
         <Col md={6}>
-          <Card className="border-0 shadow-sm h-100">
+          <Card className="gradient-card bg-gradient-peach h-100">
             <Card.Body>
               <Card.Title className="mb-3 fs-6">
                 If you see &quot;Your connection is not private&quot;

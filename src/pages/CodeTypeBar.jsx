@@ -34,6 +34,18 @@ const formatPrepTime = (minutes) => {
   return `Prep time: ${minutes} min`;
 };
 
+// helper: rotate pastel gradient classes to keep the recipe grid lively
+const getRecipeGradient = (index) => {
+  const palette = [
+    "bg-gradient-rose",
+    "bg-gradient-sky",
+    "bg-gradient-mint",
+    "bg-gradient-peach",
+    "bg-gradient-gold",
+  ];
+  return palette[index % palette.length];
+};
+
 // component: renders CodeType Bar recipe explorer with search, filter, and detail view
 function CodeTypeBar() {
   const { callApi, loading, error } = useApi();
@@ -267,7 +279,7 @@ function CodeTypeBar() {
       />
 
       {/* Filters */}
-      <Card className="border-0 shadow-sm mb-4">
+      <Card className="gradient-card bg-gradient-lilac mb-4">
         <Card.Body>
           <Form onSubmit={handleSearchSubmit}>
             <Row className="g-3 align-items-end">
@@ -350,10 +362,10 @@ function CodeTypeBar() {
 
       {/* Recipe grid */}
       <Row className="g-3">
-        {recipes.map((recipe) => (
+        {recipes.map((recipe, index) => (
           <Col key={recipe.id} md={4}>
             <Card
-              className="h-100 border-0 shadow-sm"
+              className={`h-100 gradient-card text-dark ${getRecipeGradient(index)}`}
               role="button"
               onClick={() => handleOpenRecipe(recipe.id)}
             >

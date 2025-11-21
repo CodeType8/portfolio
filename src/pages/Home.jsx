@@ -75,7 +75,7 @@ function Home() {
         <Row className="g-3">
           {/* CodeType Bar */}
           <Col md={4}>
-            <Card className="h-100 border-0 shadow-sm">
+            <Card className="h-100 gradient-card bg-gradient-peach text-dark">
               <Card.Body className="d-flex flex-column">
                 <Card.Title>CodeType Bar</Card.Title>
                 <Card.Text className="small text-muted mb-3">
@@ -90,7 +90,7 @@ function Home() {
                   <Button
                     as={Link}
                     to="/codetype-bar"
-                    variant="outline-primary"
+                    variant="dark"
                     size="sm"
                   >
                     View cocktail recipes
@@ -102,7 +102,7 @@ function Home() {
 
           {/* Streaming */}
           <Col md={4}>
-            <Card className="h-100 border-0 shadow-sm">
+            <Card className="h-100 gradient-card bg-gradient-sky text-dark">
               <Card.Body className="d-flex flex-column">
                 <Card.Title>Streaming / Plex</Card.Title>
                 <Card.Text className="small text-muted mb-3">
@@ -117,7 +117,7 @@ function Home() {
                   <Button
                     as={Link}
                     to="/streaming"
-                    variant="outline-primary"
+                    variant="dark"
                     size="sm"
                   >
                     Open streaming info
@@ -129,7 +129,7 @@ function Home() {
 
           {/* Game Servers */}
           <Col md={4}>
-            <Card className="h-100 border-0 shadow-sm">
+            <Card className="h-100 gradient-card bg-gradient-mint text-dark">
               <Card.Body className="d-flex flex-column">
                 <Card.Title>Game Server</Card.Title>
                 <Card.Text className="small text-muted mb-3">
@@ -144,7 +144,7 @@ function Home() {
                   <Button
                     as={Link}
                     to="/game-server"
-                    variant="outline-primary"
+                    variant="dark"
                     size="sm"
                   >
                     View game servers
@@ -156,7 +156,7 @@ function Home() {
 
           {/* Portfolio */}
           <Col md={6}>
-            <Card className="h-100 border-0 shadow-sm">
+            <Card className="h-100 gradient-card bg-gradient-rose text-dark">
               <Card.Body className="d-flex flex-column">
                 <Card.Title>Portfolio</Card.Title>
                 <Card.Text className="small text-muted mb-3">
@@ -171,7 +171,7 @@ function Home() {
                   <Button
                     as={Link}
                     to="/portfolio"
-                    variant="outline-secondary"
+                    variant="dark"
                     size="sm"
                   >
                     Browse portfolio
@@ -183,7 +183,7 @@ function Home() {
 
           {/* Access Info */}
           <Col md={6}>
-            <Card className="h-100 border-0 shadow-sm">
+            <Card className="h-100 gradient-card bg-gradient-gold text-dark">
               <Card.Body className="d-flex flex-column">
                 <Card.Title>Access Info</Card.Title>
                 <Card.Text className="small text-muted mb-3">
@@ -198,7 +198,7 @@ function Home() {
                   <Button
                     as={Link}
                     to="/access-info"
-                    variant="outline-secondary"
+                    variant="dark"
                     size="sm"
                   >
                     Open access overview
@@ -212,7 +212,7 @@ function Home() {
 
       {/* Closing highlight section */}
       <section className="mt-4">
-        <Card className="border-0 bg-light">
+        <Card className="gradient-card bg-gradient-lilac text-dark">
           <Card.Body className="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
             <div>
               <Card.Title className="mb-1">

@@ -226,13 +226,15 @@ function Portfolio() {
           {profile.summary && (
             <Row className="mt-4">
               <Col md={12}>
-                <div className="p-3 rounded-3 bg-light bg-opacity-75 text-dark">
-                  <div className="d-flex align-items-center gap-2 mb-2">
-                    <Badge bg="dark">Summary</Badge>
-                    <span className="small text-muted">Professional snapshot</span>
-                  </div>
-                  <div className="small mb-0">{profile.summary}</div>
-                </div>
+                <Card className="gradient-card bg-gradient-lilac">
+                  <Card.Body>
+                    <div className="d-flex align-items-center gap-2 mb-2">
+                      <Badge bg="dark">Summary</Badge>
+                      <span className="small text-muted">Professional snapshot</span>
+                    </div>
+                    <div className="small mb-0">{profile.summary}</div>
+                  </Card.Body>
+                </Card>
               </Col>
             </Row>
           )}
@@ -263,7 +265,7 @@ function Portfolio() {
                       key={exp.id}
                       className="px-0 pb-3"
                     >
-                      <Card className="border-0">
+                      <Card className="border-0 gradient-card bg-gradient-sky">
                         <Card.Body className="p-0">
                           <div className="d-flex justify-content-between flex-wrap gap-1">
                             <div>
@@ -328,7 +330,7 @@ function Portfolio() {
                       key={edu.id}
                       className="px-0 pb-3"
                     >
-                      <Card className="border-0">
+                      <Card className="border-0 gradient-card bg-gradient-mint">
                         <Card.Body className="p-0">
                           <div className="fw-semibold">
                             {edu.school_name}
@@ -377,7 +379,7 @@ function Portfolio() {
                 {projects.map((project) => (
                   <Card
                     key={project.id}
-                    className="border-0 shadow-sm mb-3"
+                    className="border-0 gradient-card bg-gradient-rose mb-3"
                   >
                     <Card.Body>
                       <div className="d-flex justify-content-between align-items-start mb-1">
@@ -441,7 +443,7 @@ function Portfolio() {
                   ([category, skills]) => (
                     <Card
                       key={category}
-                      className="border-0 bg-light mb-2"
+                      className="border-0 gradient-card bg-gradient-gold mb-2"
                     >
                       <Card.Body className="py-2">
                         <div className="small fw-semibold mb-1">
