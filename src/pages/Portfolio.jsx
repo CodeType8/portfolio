@@ -9,6 +9,7 @@ import {
   Spinner,
   ListGroup,
 } from "react-bootstrap";
+import PageHero from "../components/PageHero";
 import { useApi } from "../hooks/useApi";
 import portfolioImg from "../assets/img/bg.jpg";
 
@@ -105,6 +106,19 @@ function Portfolio() {
     return `${first}${last}`.toUpperCase();
   }, [profile]);
 
+  const heroBadges = useMemo(() => {
+    const baseBadges = [
+      { text: "Portfolio", variant: "light", textColor: "dark" },
+      { text: "Full Stack", variant: "primary" },
+    ];
+
+    if (profile?.headline) {
+      baseBadges.push({ text: profile.headline, variant: "dark" });
+    }
+
+    return baseBadges;
+  }, [profile]);
+
   return (
     <div className="py-4">
       {/* Loading / error state */}
@@ -132,124 +146,96 @@ function Portfolio() {
           {/* ===================== */}
           {/* Header / Summary card with background image */}
           {/* ===================== */}
-          <Card className="border-0 shadow-sm mb-4 rounded-4 overflow-hidden">
-            <Card.Body
-              className="p-4 p-lg-5 text-white"
-              style={{
-                backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(59, 130, 246, 0.65)), url(${portfolioImg})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
-              <Row className="g-4 align-items-center">
-                <Col md="auto">
-                  {/* simple avatar using initials */}
-                  <div
-                    style={{
-                      width: 88,
-                      height: 88,
-                      borderRadius: "50%",
-                      backgroundColor: "rgba(255, 255, 255, 0.12)",
-                      color: "#fff",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: "2rem",
-                      fontWeight: 700,
-                      border: "1px solid rgba(255, 255, 255, 0.35)",
-                    }}
+          <PageHero
+            backgroundImage={portfolioImg}
+            gradient="linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(59, 130, 246, 0.65))"
+            badges={heroBadges}
+            title={profile.name}
+            description={
+              <>
+                {profile.nickname && (
+                  <span className="d-block mb-1">Also known as {profile.nickname}</span>
+                )}
+                <span className="small text-light">
+                  {profile.location && `${profile.location} · `}10+ years of experience in full stack engineering.
+                </span>
+              </>
+            }
+            actions={(
+              <div className="d-flex align-items-center gap-2 justify-content-start flex-wrap">
+                {profile.website_url && (
+                  <Button
+                    variant="light"
+                    size="sm"
+                    as="a"
+                    href={profile.website_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-dark"
                   >
-                    {initials}
-                  </div>
-                </Col>
-                <Col md>
-                  <div className="d-flex flex-wrap align-items-center gap-2 mb-2">
-                    <Badge bg="light" text="dark" className="text-uppercase fw-semibold">
-                      Portfolio
-                    </Badge>
-                    <Badge bg="primary" className="text-uppercase fw-semibold">
-                      Full Stack
-                    </Badge>
-                    {profile.headline && (
-                      <Badge bg="dark" className="text-uppercase fw-semibold">
-                        {profile.headline}
-                      </Badge>
-                    )}
-                  </div>
-                  <h2 className="fw-semibold mb-2">{profile.name}</h2>
-                  {profile.nickname && (
-                    <div className="small text-light mb-1">
-                      Also known as {profile.nickname}
-                    </div>
-                  )}
-                  <div className="small text-light">
-                    {profile.location && (
-                      <>
-                        {profile.location}
-                        {" · "}
-                      </>
-                    )}
-                    10+ years of experience in full stack engineering.
-                  </div>
-                </Col>
-                <Col md="auto">
-                  <div className="d-flex align-items-center gap-2 justify-content-md-end justify-content-start">
-                    {profile.website_url && (
-                      <Button
-                        variant="light"
-                        size="sm"
-                        as="a"
-                        href={profile.website_url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-dark"
-                      >
-                        Website
-                      </Button>
-                    )}
-                    {profile.github_url && (
-                      <Button
-                        variant="outline-light"
-                        size="sm"
-                        as="a"
-                        href={profile.github_url}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        GitHub
-                      </Button>
-                    )}
-                    {profile.linkedin_url && (
-                      <Button
-                        variant="outline-light"
-                        size="sm"
-                        as="a"
-                        href={profile.linkedin_url}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        LinkedIn
-                      </Button>
-                    )}
-                  </div>
-                </Col>
-              </Row>
+                    Website
+                  </Button>
+                )}
+                {profile.github_url && (
+                  <Button
+                    variant="outline-light"
+                    size="sm"
+                    as="a"
+                    href={profile.github_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    GitHub
+                  </Button>
+                )}
+                {profile.linkedin_url && (
+                  <Button
+                    variant="outline-light"
+                    size="sm"
+                    as="a"
+                    href={profile.linkedin_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    LinkedIn
+                  </Button>
+                )}
+              </div>
+            )}
+            aside={(
+              <div
+                style={{
+                  width: 88,
+                  height: 88,
+                  borderRadius: "50%",
+                  backgroundColor: "rgba(255, 255, 255, 0.12)",
+                  color: "#fff",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "2rem",
+                  fontWeight: 700,
+                  border: "1px solid rgba(255, 255, 255, 0.35)",
+                }}
+              >
+                {initials}
+              </div>
+            )}
+          />
 
-              {profile.summary && (
-                <Row className="mt-4">
-                  <Col md={12}>
-                    <div className="p-3 rounded-3 bg-light bg-opacity-75 text-dark">
-                      <div className="d-flex align-items-center gap-2 mb-2">
-                        <Badge bg="dark">Summary</Badge>
-                        <span className="small text-muted">Professional snapshot</span>
-                      </div>
-                      <div className="small mb-0">{profile.summary}</div>
-                    </div>
-                  </Col>
-                </Row>
-              )}
-            </Card.Body>
-          </Card>
+          {profile.summary && (
+            <Row className="mt-4">
+              <Col md={12}>
+                <div className="p-3 rounded-3 bg-light bg-opacity-75 text-dark">
+                  <div className="d-flex align-items-center gap-2 mb-2">
+                    <Badge bg="dark">Summary</Badge>
+                    <span className="small text-muted">Professional snapshot</span>
+                  </div>
+                  <div className="small mb-0">{profile.summary}</div>
+                </div>
+              </Col>
+            </Row>
+          )}
 
           <Row className="g-4">
             {/* ===================== */}

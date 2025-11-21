@@ -1,6 +1,7 @@
 // page: GameServer – game server overview using /games API
 import { useEffect, useState, useMemo } from "react";
 import { Row, Col, Card, Badge, Button, Spinner } from "react-bootstrap";
+import PageHero from "../components/PageHero";
 import { useApi } from "../hooks/useApi";
 
 import arkImg from "../assets/img/ark.jpg";
@@ -82,54 +83,31 @@ function GameServer() {
 
   return (
     <div className="py-4">
-      {/* Header hero */}
-      <Card className="border-0 shadow-sm mb-4 rounded-4 overflow-hidden">
-        <Card.Body
-          className="p-4 p-lg-5 text-white"
-          style={{
-            backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(16, 185, 129, 0.6)), url(${minecraftImg})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          <div className="d-flex flex-column gap-3">
-            <div className="d-flex flex-wrap align-items-center gap-2">
-              <Badge bg="light" text="dark" className="text-uppercase fw-semibold">
-                Game Servers
-              </Badge>
-              <Badge bg="success" className="text-uppercase fw-semibold">
-                Live Status
-              </Badge>
+      <PageHero
+        backgroundImage={minecraftImg}
+        gradient="linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(16, 185, 129, 0.6))"
+        badges={[
+          { text: "Game Servers", variant: "light", textColor: "dark" },
+          { text: "Live Status", variant: "success" },
+        ]}
+        title="Game Server Overview"
+        description="Track which community servers are open, see connection details at a glance, and stay informed about availability managed by CodeType."
+        meta={(
+          <div className="d-flex flex-wrap align-items-center gap-2">
+            <Badge bg="success" pill>
+              {openGames.length} Open
+            </Badge>
+            <Badge bg="secondary" pill>
+              {closedGames.length} Closed
+            </Badge>
+            {pagination && (
               <span className="small text-light">
-                Minecraft · Palworld · Ark · RLcraft
+                {pagination.totalItems} total · Page {pagination.page} / {pagination.totalPages}
               </span>
-            </div>
-
-            <div className="d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-4">
-              <div className="flex-grow-1">
-                <h2 className="fw-semibold mb-2">Game Server Overview</h2>
-                <p className="mb-3">
-                  Track which community servers are open, see connection details at a glance,
-                  and stay informed about availability managed by CodeType.
-                </p>
-                <div className="d-flex flex-wrap align-items-center gap-2">
-                  <Badge bg="success" pill>
-                    {openGames.length} Open
-                  </Badge>
-                  <Badge bg="secondary" pill>
-                    {closedGames.length} Closed
-                  </Badge>
-                  {pagination && (
-                    <span className="small text-light">
-                      {pagination.totalItems} total · Page {pagination.page} / {pagination.totalPages}
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
+            )}
           </div>
-        </Card.Body>
-      </Card>
+        )}
+      />
 
       {/* Loading / Error */}
       {loading && (

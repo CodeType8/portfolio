@@ -1,5 +1,6 @@
 // page: Streaming – modern Plex landing
 import { Card, Button, Row, Col, Alert, Badge } from "react-bootstrap";
+import PageHero from "../components/PageHero";
 import plexImg from "../assets/img/plex.jpg";
 
 function Streaming() {
@@ -13,51 +14,35 @@ function Streaming() {
 
   return (
     <div className="py-4">
-      {/* Hero card with image */}
-      <Card className="border-0 shadow-sm mb-4 rounded-4 overflow-hidden">
-        <Card.Body
-          className="p-4 p-lg-5 text-white"
-          style={{
-            backgroundImage: `linear-gradient(135deg, rgba(23, 23, 23, 0.9), rgba(234, 179, 8, 0.55)), url(${plexImg})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          <div className="d-flex flex-column gap-4">
-            <div className="d-flex flex-wrap align-items-center gap-2">
-              <Badge bg="warning" text="dark" className="text-uppercase fw-semibold">
-                Plex
-              </Badge>
-              <Badge bg="dark" className="text-uppercase fw-semibold">
-                Private Streaming
-              </Badge>
-              <span className="small text-light">
-                Personal media streaming by CodeType
-              </span>
-            </div>
-
-            <div className="d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-4">
-              <div className="flex-grow-1">
-                <h2 className="fw-semibold mb-3">Streaming / Plex</h2>
-                <p className="mb-4">
-                  Access your curated library of movies, shows, and more through a private Plex server.
-                  Optimized for browsers, mobile apps, smart TVs, and streaming devices without layout issues.
-                </p>
-                <div className="d-flex flex-wrap gap-2 align-items-center mb-2">
-                  <Button variant="light" size="lg" className="text-dark" onClick={handleOpenPlex}>
-                    Go to CodeType Plex
-                  </Button>
-                </div>
-                <div>
-                  <span className="small text-light">
-                    Opens <strong>video.codetypeweb.com</strong> in a new tab.
-                  </span>
-                </div>
-              </div>
-            </div>
+      <PageHero
+        backgroundImage={plexImg}
+        gradient="linear-gradient(135deg, rgba(23, 23, 23, 0.9), rgba(234, 179, 8, 0.55))"
+        badges={[
+          {
+            text: "Plex",
+            variant: "warning",
+            textColor: "dark",
+          },
+          {
+            text: "Private Streaming",
+            variant: "dark",
+          },
+        ]}
+        title="Streaming / Plex"
+        description="Access your curated library of movies, shows, and more through a private Plex server. Optimized for browsers, mobile apps, smart TVs, and streaming devices without layout issues."
+        actions={(
+          <div className="d-flex flex-wrap gap-2 align-items-center mb-2">
+            <Button variant="light" size="lg" className="text-dark" onClick={handleOpenPlex}>
+              Go to CodeType Plex
+            </Button>
           </div>
-        </Card.Body>
-      </Card>
+        )}
+        meta={(
+          <span className="small text-light">
+            Opens <strong>video.codetypeweb.com</strong> in a new tab.
+          </span>
+        )}
+      />
 
       {/* Detail sections */}
       <Row className="g-4">
