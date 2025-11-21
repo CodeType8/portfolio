@@ -15,7 +15,7 @@ function Home() {
           <Card.Body
             className="p-4 p-lg-5 text-white"
             style={{
-              backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(34, 197, 94, 0.55)), url(${bgImg})`,
+              backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(146, 34, 250, 0.55)), url(${bgImg})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
