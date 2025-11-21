@@ -30,6 +30,14 @@ function AppNavbar() {
           <Nav className="ms-auto">
             <Nav.Link
               as={NavLink}
+              to="/"
+              className={navLinkClass}
+              onClick={handleClose}
+            >
+              Home
+            </Nav.Link>
+            <Nav.Link
+              as={NavLink}
               to="/codetype-bar"
               className={navLinkClass}
               onClick={handleClose}
