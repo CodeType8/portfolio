@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "start": "vite build",
+    "build": "vite build",
     "lint": "eslint .",
-    "serve": "vite preview"
+    "start": "vite preview"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
